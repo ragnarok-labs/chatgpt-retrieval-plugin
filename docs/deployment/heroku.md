@@ -63,9 +63,10 @@ docker buildx build --platform linux/amd64 -t [image-name] .
 Push the Docker image to the Heroku Container Registry, and release the newly pushed image to your Heroku app.
 
 ```
-docker tag [image-name] registry.heroku.com/[app-name]/web
-docker push registry.heroku.com/[app-name]/web
-heroku container:release web -a [app-name]
+ft-chatgpt-retrieval-plugin
+docker tag ft-chatgpt-retrieval-plugin registry.heroku.com/ft-chatgpt-retrieval-plugin/web
+docker push registry.heroku.com/ft-chatgpt-retrieval-plugin/web
+heroku container:release web -a ft-chatgpt-retrieval-plugin
 ```
 
 Alternatively, you can use a command from the to push the Docker image to the Heroku Container Registry by running:

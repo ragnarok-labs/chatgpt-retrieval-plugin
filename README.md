@@ -458,3 +458,10 @@ We would like to extend our gratitude to the following contributors for their co
 - [Redis](https://redis.io/)
   - [spartee](https://github.com/spartee)
   - [tylerhutcherson](https://github.com/tylerhutcherson)
+
+## Commands for building and deploying
+
+docker buildx build --platform linux/amd64 -t ft-chatgpt-retrieval-plugin .
+docker tag ft-chatgpt-retrieval-plugin registry.heroku.com/ft-chatgpt-retrieval-plugin/web
+docker push registry.heroku.com/ft-chatgpt-retrieval-plugin/web
+heroku container:release web -a ft-chatgpt-retrieval-plugin

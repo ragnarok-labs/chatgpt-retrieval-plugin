@@ -18,6 +18,16 @@ from services.file import get_document_from_file
 
 from models.models import DocumentMetadata, Source
 
+from decouple import config
+
+# Look, I know this is probably bad but whatever
+os.environ['DATASTORE']=config('DATASTORE')
+os.environ['BEARER_TOKEN']=config('BEARER_TOKEN')
+os.environ['OPENAI_API_KEY']=config('OPENAI_API_KEY')
+os.environ['PINECONE_API_KEY']=config('PINECONE_API_KEY')
+os.environ['PINECONE_ENVIRONMENT']=config('PINECONE_ENVIRONMENT')
+os.environ['PINECONE_INDEX']=config('PINECONE_INDEX')
+
 bearer_scheme = HTTPBearer()
 BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
 assert BEARER_TOKEN is not None
@@ -37,7 +47,7 @@ sub_app = FastAPI(
     title="Retrieval Plugin API",
     description="A retrieval API for querying and filtering documents based on natural language queries and metadata",
     version="1.0.0",
-    servers=[{"url": "https://your-app-url.com"}],
+    servers=[{"url": "https://ft-chatgpt-retrieval-plugin.herokuapp.com"}],
     dependencies=[Depends(validate_token)],
 )
 app.mount("/sub", sub_app)
