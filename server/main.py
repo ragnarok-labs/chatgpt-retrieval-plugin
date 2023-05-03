@@ -5,6 +5,17 @@ from fastapi import FastAPI, File, Form, HTTPException, Depends, Body, UploadFil
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.staticfiles import StaticFiles
 
+from decouple import config
+
+# Look, I know this is probably bad but whatever
+print("c: "+config('DATASTORE'))
+os.environ['DATASTORE']=config('DATASTORE')
+os.environ['BEARER_TOKEN']=config('BEARER_TOKEN')
+os.environ['OPENAI_API_KEY']=config('OPENAI_API_KEY')
+os.environ['PINECONE_API_KEY']=config('PINECONE_API_KEY')
+os.environ['PINECONE_ENVIRONMENT']=config('PINECONE_ENVIRONMENT')
+os.environ['PINECONE_INDEX']=config('PINECONE_INDEX')
+
 from models.api import (
     DeleteRequest,
     DeleteResponse,
@@ -18,15 +29,7 @@ from services.file import get_document_from_file
 
 from models.models import DocumentMetadata, Source
 
-from decouple import config
 
-# Look, I know this is probably bad but whatever
-os.environ['DATASTORE']=config('DATASTORE')
-os.environ['BEARER_TOKEN']=config('BEARER_TOKEN')
-os.environ['OPENAI_API_KEY']=config('OPENAI_API_KEY')
-os.environ['PINECONE_API_KEY']=config('PINECONE_API_KEY')
-os.environ['PINECONE_ENVIRONMENT']=config('PINECONE_ENVIRONMENT')
-os.environ['PINECONE_INDEX']=config('PINECONE_INDEX')
 
 bearer_scheme = HTTPBearer()
 BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
